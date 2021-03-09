@@ -1,12 +1,13 @@
 const express = require('express');
 const path = require('path');
+const moment = require('moment');
 const members = require('./Members');
 
 const app = express();
 
 // Middleware - Logger
 const logger = (req, res, next) => {
-    console.log('Request recieved...');
+    console.log(`${req.protocol}://${req.get('host')}${req.originalUrl}: ${moment().format('Do MMMM YYYY, h:mm:ss a')}`);
     next();
 };
 
