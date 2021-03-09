@@ -4,8 +4,17 @@ const members = require('./Members');
 
 const app = express();
 
+// Middleware - Logger
+const logger = (req, res, next) => {
+    console.log('Request recieved...');
+    next();
+};
+
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Init middleware
+app.use(logger);
 
 // API Endpoints - GET all members information
 app.get('/api/members', (req, res) => {
