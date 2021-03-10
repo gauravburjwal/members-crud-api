@@ -116,4 +116,6 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+# REST CLient Files
+*.rest
 # End of https://www.toptal.com/developers/gitignore/api/node

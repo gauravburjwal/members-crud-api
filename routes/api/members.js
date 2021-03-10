@@ -1,7 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const uuid = require("uuid");
 const members = require("../../Members");
-const logger = require('../../middleware/logger')
+const logger = require("../../middleware/logger");
 
 // Init middleware
 router.use(logger);
@@ -24,5 +25,25 @@ router.get("/:id", (req, res) => {
         res.status(400).json({ msg: `No member with id of ${req.params.id}` });
     }
 });
+
+// POST a member
+router.post("/", (req, res) => {
+    // res.send(req.body);
+    const newMember = {
+        id: uuid.v4(),
+        name: req.body.name,
+        email: req.body.email,
+        status: "active",
+    };
+
+    if (!newMember.name || !newMember.email) {
+        return res.status(400).json({ msg: "Please include a name and email" });
+    }
+
+    members.push(newMember);
+    res.json({ msg: "Member added", members });
+});
+
+
 
 module.exports = router;
