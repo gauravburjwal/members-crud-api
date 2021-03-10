@@ -1,12 +1,25 @@
 const express = require("express");
 const path = require("path");
+const exphbs = require('express-handlebars');
+const members = require('./Members');
 // const logger = require("./middleware/logger");
 
 const app = express();
 
 // Body Parser Middleware
 app.use(express.json());
+
+// To handle the form data
 app.use(express.urlencoded({ extended: false }));
+
+// Setting view engine
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
+
+// Homepage Route
+app.get('/', (req, res) => {
+    res.render('index', { title: 'Member App', members });
+});
 
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")));

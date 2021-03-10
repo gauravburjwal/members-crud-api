@@ -42,6 +42,7 @@ router.post("/", (req, res) => {
 
     members.push(newMember);
     res.json({ msg: "Member added", members });
+    // res.redirect('/');
 });
 
 // PUT - Update a member by ID
